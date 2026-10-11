@@ -204,7 +204,7 @@ For `linkedin-search` and `freehire-search` the install is optional: both have z
 
 If you're outside Denmark, you can generate an equivalent search skill for your local job board with `/add-portal` — it scaffolds the same CLI structure for any public portal and test-runs a live query before registering. See the "Job search tools" section in the README.
 
-**Optional HireSeeker search:** follow the [canonical skill](.claude/skills/hireseeker/SKILL.md) to connect its public HTTP MCP or use the official CLI with Node.js >=22.12. Claude Code invokes `/hireseeker`; Codex and Antigravity discover the [portable entry point](.agents/skills/hireseeker/SKILL.md). It has no Bun CLI directory to install and runs separately from `/scrape`.
+**Optional HireSeeker search:** follow the [canonical skill](.claude/skills/hireseeker/SKILL.md) to connect its public HTTP MCP or use the official CLI with Node.js >=22.12. Claude Code invokes `/hireseeker`; Codex and Antigravity discover the [portable entry point](.agents/skills/hireseeker-search/SKILL.md). It has no Bun CLI directory to install and runs separately from `/scrape`.
 
 ## 4. Run the setup interview
 
