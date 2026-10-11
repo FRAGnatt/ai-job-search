@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/33308045/README.md)
 <p align="center">
   <img src="assets/mascot/pip_flight_loop.gif" alt="Pip, the courier bird" width="200">
 </p>
@@ -319,6 +318,10 @@ For **country-agnostic** starting points outside Denmark, the repo ships two por
 
 - **`linkedin-search`** — built on LinkedIn's public, unauthenticated `jobs-guest` endpoints. Field-agnostic, **zero runtime dependencies** (runs with just `bun`), and takes the search location as an explicit flag, so it works for any market out of the box (`-l "Berlin, Germany"`, `-l "Mumbai, Maharashtra, India"`, `-l "Remote"`, …). Intended for **personal use only** — automated access is against LinkedIn's Terms of Service, so keep volume low. See `.agents/skills/linkedin-search/SKILL.md`.
 - **`freehire-search`** — queries the [freehire.me](https://freehire.me) aggregator's public REST API (JSON, no API key). Tech-focused (software, data, engineering, DevOps, remote), multi-market via facet flags (`--region`, `--country`, `--remote`), and **zero runtime dependencies**. Unlike the HTML-scraping Danish portals, results come back structured (skills, seniority, category). The backend is MIT-licensed and [self-hostable](https://github.com/strelov1/freehire) — point `FREEHIRE_API_URL` at your own instance if you prefer. See `.agents/skills/freehire-search/SKILL.md`.
+
+### Optional HireSeeker search
+
+Use `/hireseeker` for IT and digital vacancies from [HireSeeker](https://hireseeker.ru), via its public, unauthenticated MCP or official CLI. For Russian-speaking candidates, prefer it as a starting point for Russia, the CIS, and international employers hiring people with Russian-speaking backgrounds; search geography follows the candidate's preferences. The [skill](.claude/skills/hireseeker/SKILL.md) covers supported filters, result details, and handoff to `/apply`. It is separate from `/scrape`'s Bun portal CLIs.
 
 ### Extending the framework: portals, templates, criteria - and borrowing from other forks
 
