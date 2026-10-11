@@ -26,7 +26,12 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRAPER_SKILL = REPO_ROOT / ".claude" / "skills" / "job-scraper" / "SKILL.md"
-PORTAL_CLIS = sorted((REPO_ROOT / ".agents" / "skills").glob("*-search"))
+# A portable skill may use a "-search" name without implementing a Bun CLI.
+# Match Step 1b's file-based eligibility rule rather than the folder suffix.
+PORTAL_CLIS = sorted(
+    entry.parent.parent.parent
+    for entry in (REPO_ROOT / ".agents" / "skills").glob("*/cli/src/cli.ts")
+)
 
 # Derived, never copied: a hardcoded field list drifts in lockstep with
 # nothing - if Step 2's prose drops or adds a field, the known-good portals
@@ -59,6 +64,7 @@ class ScrapeSearchOutputContractTests(unittest.TestCase):
         self.assertGreaterEqual(fields, {"title", "company", "location", "date", "url"})
 
     def test_every_portal_cli_emits_the_step2_contract_fields(self):
+        self.assertTrue(PORTAL_CLIS, "No portal CLIs were discovered")
         contract = derive_contract_fields()
         failures: list[str] = []
         for portal in PORTAL_CLIS:
