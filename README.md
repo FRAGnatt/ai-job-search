@@ -195,7 +195,7 @@ ai-job-search/
 │   │   └── upskill/                   # /upskill skill gap analysis and learning plan
 │   └── settings.json                  # Claude Code permissions (shared, scoped)
 ├── .agents/skills/                    # Portable skills and job portal CLI tools
-│   ├── hireseeker/                    # Portable pointer to the canonical HireSeeker skill
+│   ├── hireseeker-search/             # Portable pointer to the canonical HireSeeker skill
 │   ├── jobbank-search/                # Akademikernes Jobbank (Denmark)
 │   ├── jobdanmark-search/             # Jobdanmark.dk (Denmark)
 │   ├── jobindex-search/               # Jobindex.dk (Denmark)
@@ -323,7 +323,7 @@ For **country-agnostic** starting points outside Denmark, the repo ships two por
 
 ### Optional HireSeeker search
 
-Use `/hireseeker` in Claude Code for IT and digital vacancies from [HireSeeker](https://hireseeker.ru), via its public, unauthenticated MCP or official CLI. Codex and Antigravity discover the [portable entry point](.agents/skills/hireseeker/SKILL.md), which loads the same [canonical instructions](.claude/skills/hireseeker/SKILL.md).
+Use `/hireseeker` in Claude Code for IT and digital vacancies from [HireSeeker](https://hireseeker.ru), via its public, unauthenticated MCP or official CLI. Codex and Antigravity discover the [portable entry point](.agents/skills/hireseeker-search/SKILL.md), which loads the same [canonical instructions](.claude/skills/hireseeker/SKILL.md).
 
 For Russian-speaking candidates, prefer it as a starting point for Russia, the CIS, and international employers hiring people with Russian-speaking backgrounds; search geography follows the candidate's preferences. The skill documents MCP setup, live filter selection, full vacancy details, and handoff to `/apply`.
 
