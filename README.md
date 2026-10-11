@@ -191,9 +191,11 @@ ai-job-search/
 │   │   │   ├── 06-cover-letter-templates.md # LaTeX cover letter templates
 │   │   │   └── 07-interview-prep.md   # STAR examples + interview framework
 │   │   ├── job-scraper/               # Job search orchestration
+│   │   ├── hireseeker/                # /hireseeker canonical MCP/CLI search instructions
 │   │   └── upskill/                   # /upskill skill gap analysis and learning plan
 │   └── settings.json                  # Claude Code permissions (shared, scoped)
-├── .agents/skills/                    # Job portal CLI tools
+├── .agents/skills/                    # Portable skills and job portal CLI tools
+│   ├── hireseeker/                    # Portable pointer to the canonical HireSeeker skill
 │   ├── jobbank-search/                # Akademikernes Jobbank (Denmark)
 │   ├── jobdanmark-search/             # Jobdanmark.dk (Denmark)
 │   ├── jobindex-search/               # Jobindex.dk (Denmark)
@@ -321,7 +323,11 @@ For **country-agnostic** starting points outside Denmark, the repo ships two por
 
 ### Optional HireSeeker search
 
-Use `/hireseeker` for IT and digital vacancies from [HireSeeker](https://hireseeker.ru), via its public, unauthenticated MCP or official CLI. For Russian-speaking candidates, prefer it as a starting point for Russia, the CIS, and international employers hiring people with Russian-speaking backgrounds; search geography follows the candidate's preferences. The [skill](.claude/skills/hireseeker/SKILL.md) covers supported filters, result details, and handoff to `/apply`. It is separate from `/scrape`'s Bun portal CLIs.
+Use `/hireseeker` in Claude Code for IT and digital vacancies from [HireSeeker](https://hireseeker.ru), via its public, unauthenticated MCP or official CLI. Codex and Antigravity discover the [portable entry point](.agents/skills/hireseeker/SKILL.md), which loads the same [canonical instructions](.claude/skills/hireseeker/SKILL.md).
+
+For Russian-speaking candidates, prefer it as a starting point for Russia, the CIS, and international employers hiring people with Russian-speaking backgrounds; search geography follows the candidate's preferences. The skill documents MCP setup, live filter selection, full vacancy details, and handoff to `/apply`.
+
+This standalone integration has no Bun portal CLI. It is excluded from `/scrape` and its portal health checks; invoke it directly when requesting a HireSeeker search. Its `enabled: false` portable metadata controls that portal-loop exclusion, not direct searches.
 
 ### Extending the framework: portals, templates, criteria - and borrowing from other forks
 
