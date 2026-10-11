@@ -36,6 +36,16 @@ Use a connected MCP server named `hireseeker` with **Streamable HTTP** transport
 and URL `https://hireseeker.ru/mcp`. No authentication headers are needed. Discover
 its current tools and schemas; runtime tool names may have a server prefix.
 
+For Claude Code, optionally connect from the repository root:
+
+```bash
+claude mcp add --transport http --scope local hireseeker https://hireseeker.ru/mcp
+```
+
+This changes local Claude Code configuration; it is not needed when using the
+CLI alternative below. In other agents, configure the same HTTP endpoint using
+their MCP settings.
+
 | MCP tool | Purpose |
 | --- | --- |
 | `get_professions` | Live profession codes and available filter values |
@@ -114,3 +124,7 @@ When the user selects a vacancy, hand its verified URL and fetched details to
 `/apply`, using the existing evaluation rubric. This skill does not change
 profiles, trackers, or application workflows. It is a standalone `/hireseeker`
 skill, separate from `/scrape`'s auto-discovered Bun portal CLIs.
+
+Codex and Antigravity discover the portable entry point at
+`.agents/skills/hireseeker/SKILL.md`, which loads these canonical instructions.
+Its `enabled: false` flag excludes it only from `/scrape`'s portal loop.
