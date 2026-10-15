@@ -178,9 +178,11 @@ ai-job-search/
 │   │   │   ├── 06-cover-letter-templates.md # LaTeX cover letter templates
 │   │   │   └── 07-interview-prep.md   # STAR examples + interview framework
 │   │   ├── job-scraper/               # Job search orchestration
+│   │   ├── hireseeker/                # /hireseeker canonical public web-search instructions
 │   │   └── upskill/                   # /upskill skill gap analysis and learning plan
 │   └── settings.json                  # Claude Code permissions (shared, scoped)
-├── .agents/skills/                    # Job portal CLI tools
+├── .agents/skills/                    # Portable skills and job portal CLI tools
+│   ├── hireseeker-search/             # Portable pointer to the canonical HireSeeker skill
 │   ├── jobbank-search/                # Akademikernes Jobbank (Denmark)
 │   ├── jobdanmark-search/             # Jobdanmark.dk (Denmark)
 │   ├── jobindex-search/               # Jobindex.dk (Denmark)
@@ -306,6 +308,14 @@ For **country-agnostic** starting points outside Denmark, the repo ships two por
 
 - **`linkedin-search`** — built on LinkedIn's public, unauthenticated `jobs-guest` endpoints. Field-agnostic, **zero runtime dependencies** (runs with just `bun`), and takes the search location as an explicit flag, so it works for any market out of the box (`-l "Berlin, Germany"`, `-l "Mumbai, Maharashtra, India"`, `-l "Remote"`, …). Intended for **personal use only** — automated access is against LinkedIn's Terms of Service, so keep volume low. See `.agents/skills/linkedin-search/SKILL.md`.
 - **`freehire-search`** — queries the [freehire.me](https://freehire.me) aggregator's public REST API (JSON, no API key). Tech-focused (software, data, engineering, DevOps, remote), multi-market via facet flags (`--region`, `--country`, `--remote`), and **zero runtime dependencies**. Unlike the HTML-scraping Danish portals, results come back structured (skills, seniority, category). The backend is MIT-licensed and [self-hostable](https://github.com/strelov1/freehire) — point `FREEHIRE_API_URL` at your own instance if you prefer. See `.agents/skills/freehire-search/SKILL.md`.
+
+### Optional HireSeeker search
+
+Use `/hireseeker` in Claude Code to find and read public IT and digital vacancies on [HireSeeker](https://hireseeker.ru) with the agent's existing web-search and page-fetch tools. Codex and Antigravity discover the [portable entry point](.agents/skills/hireseeker-search/SKILL.md), which loads the same [canonical instructions](.claude/skills/hireseeker/SKILL.md).
+
+The skill follows the candidate's selected sources, languages, geography, and work preferences. It verifies public vacancy pages, distinguishes stated facts from missing information, and hands selected listings to `/apply`. It adds no API or MCP integration, package dependency, configuration step, or scraping script. Public-page and search-engine coverage can be incomplete; the skill reports those limits.
+
+This standalone integration has no Bun portal CLI. It is excluded from `/scrape` and its portal health checks; invoke it directly when requesting a HireSeeker search. Its `enabled: false` portable metadata controls that portal-loop exclusion, not direct searches.
 
 ### Extending the framework: portals, templates, criteria - and borrowing from other forks
 
