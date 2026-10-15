@@ -1,5 +1,5 @@
 ---
-framework_version: 1.0.0
+framework_version: 1.0.3
 ---
 
 # Agent Guidelines: AI Job Search
@@ -17,3 +17,5 @@ To prevent duplication and configuration drift across different AI agent framewo
    - Do not duplicate these rules or specifications. Treat `.claude/` files as the single source of truth.
 3. **Portal Search Skills:**
    - Job-portal search CLIs live under [.agents/skills/](.agents/skills/) in the portable Agent Skills format (with a `SKILL.md` per portal). Codex and Antigravity discover these automatically; the `/scrape` workflow in [.claude/skills/job-scraper/](.claude/skills/job-scraper/) orchestrates them.
+4. **Standalone Search Integrations:**
+   - [HireSeeker](.claude/skills/hireseeker/SKILL.md) uses existing web-search and page-fetch tools for public pages. It adds no external integration, package dependency, configuration step, or scraping script. Claude Code invokes `/hireseeker`; Codex and Antigravity discover its [portable entry point](.agents/skills/hireseeker-search/SKILL.md), which points to the same canonical instructions. Only skills with a `cli/src/cli.ts` participate in `/scrape`'s Bun portal loop and health checks.
